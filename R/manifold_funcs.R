@@ -36,9 +36,9 @@ umapr <- function(x, ...){
 }
 
 
-clustr <- function(x, ...){
-  require(mclust)
-  mc <- mclust::Mclust(x[[1]])
-  x[[2]]$mc <- stats::predict(mc, x[[1]])$classification
-  x
-}
+# clustr <- function(x, ...){
+#   require(mclust)
+#   mc <- mclust::Mclust(x[[1]])
+#   x[[2]]$mc <- stats::predict(mc, x[[1]])$classification
+#   x
+# }
