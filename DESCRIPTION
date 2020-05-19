@@ -1,0 +1,13 @@
+Package: tidysne
+Type: Package
+Title: Tidy tools for manifold learning, clustering and ordination
+Version: 0.0.1
+Author: Bindoff, A.
+Maintainer: <aidan.bindoff@utas.edu.au>
+Description: Tidy tools for manifold learning, clustering and ordination.
+License: CC-BY-4
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: 
+Depends: Rtsne, mclust, umap, dplyr, tidyr

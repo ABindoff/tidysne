@@ -1,15 +1,11 @@
-require(Rtsne)
-require(umap)
-require(mclust)
-
 tsner <- function(x, ...){
   if(!is.tsner_matrix(x)){
     stop("\nObject to tsner is not a valid tsner_matrix\nPlease use select_split to produce a tsner_matrix\n")
   }
-  m <- Rtsne(x[[1]], ...)
+  m <- Rtsne::Rtsne(x[[1]], ...)
   ys <- data.frame(m$Y)
   names(ys) <- paste0("y", 1:ncol(ys))
-  y <- bind_cols(x[[2]], x[[1]], ys)
+  y <- dplyr::bind_cols(x[[2]], x[[1]], ys)
   attributes(y) <- list(names = names(y),
                         perplexity = m$perplexity,
                         N = m$N,
@@ -28,7 +24,7 @@ umapr <- function(x, ...){
   if(!is.tsner_matrix(x)){
     stop("\nObject to tsner is not a valid tsner_matrix\nPlease use select_split to produce a tsner_matrix\n")
   }
-  m <- umap(as.matrix(x[[1]]))
+  m <- umap::umap(as.matrix(x[[1]]))
   ys <- data.frame(m$layout)
   names(ys) <- paste0("y", 1:ncol(ys))
   y <- bind_cols(x[[2]], x[[1]], ys)
@@ -42,7 +38,7 @@ umapr <- function(x, ...){
 
 clustr <- function(x, ...){
   require(mclust)
-  mc <- Mclust(x[[1]])
-  x[[2]]$mc <- predict(mc, x[[1]])$classification
+  mc <- mclust::Mclust(x[[1]])
+  x[[2]]$mc <- stats::predict(mc, x[[1]])$classification
   x
 }

@@ -14,27 +14,11 @@ select_split <- function(x, ...){
   list(a, b)
 }
 
-superwide <- function(df, key, value) {
-  # quote key
-  keyq <- rlang::enquo(key)
-  # break value vector into quotes
-  valueq <- rlang::enquo(value)
-  s <- rlang::quos(!!valueq)
-  df <- df %>% gather(variable, value, !!!s) %>%
-    unite(temp, !!keyq, variable) %>%
-    spread(temp, value)
-}
-
-
 scale_these <- function(x, ..., na.action = NULL){
   cols <- rlang::enquos(...)
-  logp0 <- function(y){
-    y <- log(y+log_plus)
-    y
-  }
   if(!is.null(na.action)){
-    x <- x %>% mutate_at(cols, na2zero)
+    x <- x %>% dplyr::mutate_at(cols, na2zero)
   }
-  x %>% mutate_at(cols, scale) %>%
-    mutate_at(cols, c)
+  x %>% dplyr::mutate_at(cols, scale) %>%
+    dplyr::mutate_at(cols, c)
 }
